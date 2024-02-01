@@ -10,7 +10,7 @@ import Display from "./modules/screen/pages/display";
 function App() {
   const router = createBrowserRouter([
     {
-      path: "/display",
+      path: "/",
       element: <Display />,
     },
   ]);
