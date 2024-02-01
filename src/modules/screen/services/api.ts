@@ -3,7 +3,7 @@ import axios from 'axios';
 export const getWeather = async () => {
     try {
         const response = await axios.get(
-            "http://dataservice.accuweather.com/forecasts/v1/hourly/1hour/188802?apikey=258od518cXWa0GcSX1ShgFL6EpY3DTUt"
+            "https://dataservice.accuweather.com/forecasts/v1/hourly/1hour/188802?apikey=258od518cXWa0GcSX1ShgFL6EpY3DTUt"
         );
 
         // Check if response status is not OK
