@@ -95,18 +95,22 @@ const Display = () => {
         <div className={styles.container4}>
           <p>
             {
-              // time
-              weatherData.length > 0 && (
-                <>
-                  {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
-                    "default",
-                    {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    }
-                  )}
-                </>
-              )
+              // // time
+              // weatherData.length > 0 && (
+              //   <>
+              //     {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
+              //       "default",
+              //       {
+              //         hour: "2-digit",
+              //         minute: "2-digit",
+              //       }
+              //     )}
+              //   </>
+              // )
+              new Date().toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })
             }
           </p>
         </div>
