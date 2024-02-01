@@ -12,8 +12,9 @@
     color: #000;
     text-align: center;
 
-    & h4 {
+    & h3 {
         line-height: 40px;
+        margin: 20px 0px;
     }
 
     .components {
@@ -144,6 +145,9 @@
                 .faculties {
                     text-align: left;
                     padding: 30px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
 
                     & h4 {
                         font-family: ndot-47;

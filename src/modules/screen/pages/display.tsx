@@ -5,11 +5,11 @@ const Display = () => {
   return (
     <div className={styles.displayScreen}>
       <p>Department of</p>
-      <h4>
+      <h3>
         ELECTRONICS &
         <br />
         COMPUTER
-      </h4>
+      </h3>
       <div className={styles.components}>
         <div className={styles.container1}>
           <p>
