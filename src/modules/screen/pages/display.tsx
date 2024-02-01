@@ -32,12 +32,13 @@ const Display = () => {
     };
 
     fetchWeather();
-  },[]);
+  }, []);
   const fahrenheitToCelsius = (fahrenheit: number): number => {
     return ((fahrenheit - 32) * 5) / 9;
   };
   return (
     <div className={styles.displayScreen}>
+      {weatherData.length > 0 && <p>API IS NOT WORKING</p>}
       <p>Department of</p>
       <h3 className={styles.title}>
         ELECTRONICS &
