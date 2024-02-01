@@ -21,6 +21,26 @@ type WeatherData = {
 
 const Display = () => {
   const [weatherData, setWeatherData] = useState([] as WeatherData[]);
+  const [currentTime, setCurrentTime] = useState<string>("");
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      const today = new Date();
+      let h: number | string = today.getHours();
+      let m: number | string = today.getMinutes();
+      const ampm: string = h >= 12 ? "PM" : "AM";
+
+      h = h % 12 || 12; // Ensure 12-hour format
+      h = h < 10 ? "0" + h : h;
+      m = m < 10 ? "0" + m : m;
+
+      const time = h + ":" + m + " " + ampm;
+      setCurrentTime(time);
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, []);
+
   useEffect(() => {
     const fetchWeather = async () => {
       try {
@@ -94,26 +114,7 @@ const Display = () => {
           </p>
         </div>
         <div className={styles.container4}>
-          <p>
-            {
-              // // time
-              // weatherData.length > 0 && (
-              //   <>
-              //     {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
-              //       "default",
-              //       {
-              //         hour: "2-digit",
-              //         minute: "2-digit",
-              //       }
-              //     )}
-              //   </>
-              // )
-              new Date().toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })
-            }
-          </p>
+          <p id="time">{currentTime}</p>
         </div>
         <div className={styles.container5}></div>
         <div className={styles.container6}></div>
