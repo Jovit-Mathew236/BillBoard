@@ -5,7 +5,7 @@ const Display = () => {
   return (
     <div className={styles.displayScreen}>
       <p>Department of</p>
-      <h3>
+      <h3 className={styles.title}>
         ELECTRONICS &
         <br />
         COMPUTER
