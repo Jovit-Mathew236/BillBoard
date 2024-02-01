@@ -1,7 +1,41 @@
-// import React from 'react'
+import { useEffect, useState } from "react";
+import { getWeather } from "../services/api";
 import styles from "./display.module.css";
 
 const Display = () => {
+  const [weatherData, setWeatherData] = useState([
+    {
+      Temperature: {
+        Value: 0,
+        Unit: "",
+        UnitType: 0,
+      },
+      WeatherIcon: 0,
+      HasPrecipitation: false,
+      PrecipitationProbability: 0,
+      IsDayTime: false,
+      EpochDateTime: 0,
+      Link: "",
+      MobileLink: "",
+      IconPhrase: "",
+      IsDaylight: false,
+    },
+  ]);
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const data = await getWeather();
+        setWeatherData(data);
+      } catch (error) {
+        console.error("Failed to fetch weather:", error);
+      }
+    };
+
+    fetchWeather();
+  }, []);
+  const fahrenheitToCelsius = (fahrenheit: number): number => {
+    return ((fahrenheit - 32) * 5) / 9;
+  };
   return (
     <div className={styles.displayScreen}>
       <p>Department of</p>
@@ -13,20 +47,68 @@ const Display = () => {
       <div className={styles.components}>
         <div className={styles.container1}>
           <p>
-            31st
+            {weatherData.length > 0 && (
+              <>
+                {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
+                  "default",
+                  {
+                    day: "2-digit",
+                  }
+                )}
+              </>
+            )}
             <br />
-            Jan
+            {/* month */}
+            {weatherData.length > 0 && (
+              <>
+                {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
+                  "default",
+                  {
+                    month: "short",
+                  }
+                )}
+              </>
+            )}
           </p>
         </div>
         <div className={styles.container2}>
-          <p>32°C</p>
+          <p>
+            {weatherData.length > 0 && (
+              <>
+                {fahrenheitToCelsius(weatherData[0].Temperature.Value).toFixed(
+                  0
+                )}
+                &#176;C
+              </>
+            )}
+          </p>
         </div>
         <div className={styles.container3}>
           <p className={styles.img}></p>
-          <p className={styles.status}>Rain</p>
+          <p className={styles.status}>
+            {
+              // status
+              weatherData.length > 0 && <>{weatherData[0].IconPhrase}</>
+            }
+          </p>
         </div>
         <div className={styles.container4}>
-          <p>10:30</p>
+          <p>
+            {
+              // time
+              weatherData.length > 0 && (
+                <>
+                  {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
+                    "default",
+                    {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }
+                  )}
+                </>
+              )
+            }
+          </p>
         </div>
         <div className={styles.container5}></div>
         <div className={styles.container6}></div>
