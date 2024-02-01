@@ -2,25 +2,25 @@ import { useEffect, useState } from "react";
 import { getWeather } from "../services/api";
 import styles from "./display.module.css";
 
+type WeatherData = {
+  Temperature: {
+    Value: number;
+    Unit: string;
+    UnitType: number;
+  };
+  WeatherIcon: number;
+  HasPrecipitation: boolean;
+  PrecipitationProbability: number;
+  IsDayTime: boolean;
+  EpochDateTime: number;
+  Link: string;
+  MobileLink: string;
+  IconPhrase: string;
+  IsDaylight: boolean;
+};
+
 const Display = () => {
-  const [weatherData, setWeatherData] = useState([
-    {
-      Temperature: {
-        Value: 0,
-        Unit: "",
-        UnitType: 0,
-      },
-      WeatherIcon: 0,
-      HasPrecipitation: false,
-      PrecipitationProbability: 0,
-      IsDayTime: false,
-      EpochDateTime: 0,
-      Link: "",
-      MobileLink: "",
-      IconPhrase: "",
-      IsDaylight: false,
-    },
-  ]);
+  const [weatherData, setWeatherData] = useState([] as WeatherData[]);
   useEffect(() => {
     const fetchWeather = async () => {
       try {
@@ -38,7 +38,7 @@ const Display = () => {
   };
   return (
     <div className={styles.displayScreen}>
-      {weatherData.length < 0 && <p>API IS NOT WORKING</p>}
+      {weatherData.length === 0 && <p>API IS NOT WORKING</p>}
       <p>Department of</p>
       <h3 className={styles.title}>
         ELECTRONICS &
