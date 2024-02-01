@@ -38,7 +38,7 @@ const Display = () => {
   };
   return (
     <div className={styles.displayScreen}>
-      {!weatherData.length > 0 && <p>API IS NOT WORKING</p>}
+      {weatherData.length < 0 && <p>API IS NOT WORKING</p>}
       <p>Department of</p>
       <h3 className={styles.title}>
         ELECTRONICS &
