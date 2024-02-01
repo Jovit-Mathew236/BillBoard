@@ -5,7 +5,7 @@ import {
   createBrowserRouter,
   // Navigate,
 } from "react-router-dom";
-import Display from "./modules/screen/pages/Display";
+import Display from "./modules/screen/pages/display";
 
 function App() {
   const router = createBrowserRouter([
