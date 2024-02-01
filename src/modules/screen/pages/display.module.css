@@ -1,13 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
 .displayScreen {
     padding: 20px;
-    height: calc(100vh - 40px);
-    width: calc(100vw - 40px);
+    height: 1280px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
+    aspect-ratio: 16 / 9;
+    color: #000;
+    text-align: center;
+
+    & h4 {
+        line-height: 40px;
+    }
 
     .components {
-        height: 87%;
+        /* height: 87%; */
+        height: calc(1280px - 260px);
         width: 100%;
         display: grid;
         grid-template-areas:
@@ -18,9 +29,10 @@
             'box6 box6 box7 box7'
             'box6 box6 box7 box7'
         ;
-        gap: 10px;
+        gap: 20px;
         /* background-color: white; */
         padding: 10px;
+        font-family: 'Space Mono', monospace;
 
 
         & div {
@@ -29,38 +41,122 @@
 
         .container1 {
             grid-area: box1;
-            border-radius: 50%;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            & p {
+                position: absolute;
+                font-size: 40px;
+                color: white;
+            }
         }
 
         .container2 {
             grid-area: box2;
             border-radius: 30px;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            & p {
+                position: absolute;
+                font-size: 40px;
+            }
         }
 
         .container3 {
             grid-area: box3;
             border-radius: 50%;
             background-color: #D71921;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            .img {
+                background-image: url(../assets/Weather.png);
+                background-size: contain;
+                position: absolute;
+                top: 70px;
+                height: 150px;
+                width: 140px;
+                background-repeat: no-repeat;
+                display: flex;
+            }
+
+            .status {
+                position: absolute;
+                bottom: 70px;
+                color: white;
+                font-size: 30px;
+            }
         }
 
         .container4 {
             grid-area: box4;
             border-radius: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            & p {
+                position: absolute;
+                font-size: 70px;
+                color: white;
+            }
         }
 
         .container5 {
             grid-area: box5;
             border-radius: 30px;
+            background-image: url(../assets/img.png);
+            background-size: cover;
+            background-position: top;
+            height: 100%;
+            width: 100%;
+            background-repeat: no-repeat;
+            display: flex;
+            border: 10px solid #fff;
+            box-sizing: border-box;
         }
 
         .container6 {
             grid-area: box6;
             border-radius: 30px;
+            background-color: #fff;
         }
 
         .container7 {
             grid-area: box7;
             border-radius: 30px;
+            color: #fff;
+            position: relative;
+
+            .details {
+                position: absolute;
+                height: 100%;
+                width: 100%;
+                border-radius: 30px;
+
+                .faculties {
+                    text-align: left;
+                    padding: 30px;
+
+                    & h4 {
+                        font-family: ndot-47;
+                    }
+
+                    & p {
+                        background-color: #fff;
+                        color: #000;
+                        width: fit-content;
+                        padding: 1px 5px;
+                    }
+                }
+            }
         }
     }
 
