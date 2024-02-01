@@ -32,7 +32,7 @@ const Display = () => {
     };
 
     fetchWeather();
-  }, []);
+  },[]);
   const fahrenheitToCelsius = (fahrenheit: number): number => {
     return ((fahrenheit - 32) * 5) / 9;
   };
