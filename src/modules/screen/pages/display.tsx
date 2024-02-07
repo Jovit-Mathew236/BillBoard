@@ -63,7 +63,7 @@ const Display = () => {
       <h3 className={styles.title}>
         ELECTRONICS &
         <br />
-        COMPUTER
+        COMPUTER ENGINEERING
       </h3>
       <div className={styles.components}>
         <div className={styles.container1}>
