@@ -131,7 +131,7 @@ const Display = () => {
                 <p>Btech,MTech</p>
               </div>
               <div className={styles.faculty}>
-                <h4>Soya Treesa Joseph</h4>
+                <h4>Soya Treesa Jose</h4>
                 <p>Btech,MTech</p>
               </div>
               <div className={styles.faculty}>
