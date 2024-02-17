@@ -58,98 +58,101 @@ const Display = () => {
   };
   return (
     <div className={styles.displayScreen}>
-      {weatherData.length === 0 && <p>API IS NOT WORKING</p>}
-      <p>Department of</p>
-      <h3 className={styles.title}>
-        ELECTRONICS &
-        <br />
-        COMPUTER
-      </h3>
-      <div className={styles.components}>
-        <div className={styles.container1}>
-          <p>
-            {weatherData.length > 0 && (
-              <>
-                {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
-                  "default",
-                  {
-                    day: "2-digit",
-                  }
-                )}
-              </>
-            )}
+      {weatherData.length === 0 ? (
+        <p className={styles.error}>API IS NOT WORKING</p>
+      ) : (
+        <>
+          <p>Department of</p>
+          <h3 className={styles.title}>
+            ELECTRONICS &
             <br />
-            {/* month */}
-            {weatherData.length > 0 && (
-              <>
-                {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
-                  "default",
-                  {
-                    month: "short",
-                  }
+            COMPUTER
+          </h3>
+          <div className={styles.components}>
+            <div className={styles.container1}>
+              <p>
+                {weatherData.length > 0 && (
+                  <>
+                    {new Date(
+                      weatherData[0].EpochDateTime * 1000
+                    ).toLocaleString("default", {
+                      day: "2-digit",
+                    })}
+                  </>
                 )}
-              </>
-            )}
-          </p>
-        </div>
-        <div className={styles.container2}>
-          <p>
-            {weatherData.length > 0 && (
-              <>
-                {fahrenheitToCelsius(weatherData[0].Temperature.Value).toFixed(
-                  0
+                <br />
+                {/* month */}
+                {weatherData.length > 0 && (
+                  <>
+                    {new Date(
+                      weatherData[0].EpochDateTime * 1000
+                    ).toLocaleString("default", {
+                      month: "short",
+                    })}
+                  </>
                 )}
-                &#176;C
-              </>
-            )}
-          </p>
-        </div>
-        <div className={styles.container3}>
-          <p className={styles.img}></p>
-          <p className={styles.status}>
-            {
-              // status
-              weatherData.length > 0 && <>{weatherData[0].IconPhrase}</>
-            }
-          </p>
-        </div>
-        <div className={styles.container4}>
-          <p id="time">{currentTime}</p>
-        </div>
-        <div className={styles.container5}></div>
-        <div className={styles.container6}></div>
-        <div className={styles.container7}>
-          <div className={styles.details}>
-            <h3>Faculty</h3>
-            <div className={styles.faculties}>
-              <div className={styles.faculty}>
-                <h4>Dr. Giby Jose</h4>
-                <p>Btech,M.E,Phd</p>
-              </div>
-              <div className={styles.faculty}>
-                <h4>Shilpa Lizbeth George</h4>
-                <p>Btech,MTech</p>
-              </div>
-              <div className={styles.faculty}>
-                <h4>Soya Treesa Joseph</h4>
-                <p>Btech,MTech</p>
-              </div>
-              <div className={styles.faculty}>
-                <h4>Ashitha Jose</h4>
-                <p>Btech,MTech</p>
-              </div>
-              <div className={styles.faculty}>
-                <h4>Ancy Mathew</h4>
-                <p>Btech,M.E,Phd</p>
-              </div>
-              <div className={styles.faculty}>
-                <h4>Tinu Thomas</h4>
-                <p>Btech,M.E,Phd</p>
+              </p>
+            </div>
+            <div className={styles.container2}>
+              <p>
+                {weatherData.length > 0 && (
+                  <>
+                    {fahrenheitToCelsius(
+                      weatherData[0].Temperature.Value
+                    ).toFixed(0)}
+                    &#176;C
+                  </>
+                )}
+              </p>
+            </div>
+            <div className={styles.container3}>
+              <p className={styles.img}></p>
+              <p className={styles.status}>
+                {
+                  // status
+                  weatherData.length > 0 && <>{weatherData[0].IconPhrase}</>
+                }
+              </p>
+            </div>
+            <div className={styles.container4}>
+              <p id="time">{currentTime}</p>
+            </div>
+            <div className={styles.container5}></div>
+            <div className={styles.container6}></div>
+            <div className={styles.container7}>
+              <div className={styles.details}>
+                <h3>Faculty</h3>
+                <div className={styles.faculties}>
+                  <div className={styles.faculty}>
+                    <h4>Dr. Giby Jose</h4>
+                    <p>Btech,M.E,Phd</p>
+                  </div>
+                  <div className={styles.faculty}>
+                    <h4>Shilpa Lizbeth George</h4>
+                    <p>Btech,MTech</p>
+                  </div>
+                  <div className={styles.faculty}>
+                    <h4>Soya Treesa Joseph</h4>
+                    <p>Btech,MTech</p>
+                  </div>
+                  <div className={styles.faculty}>
+                    <h4>Ashitha Jose</h4>
+                    <p>Btech,MTech</p>
+                  </div>
+                  <div className={styles.faculty}>
+                    <h4>Ancy Mathew</h4>
+                    <p>Btech,M.E,Phd</p>
+                  </div>
+                  <div className={styles.faculty}>
+                    <h4>Tinu Thomas</h4>
+                    <p>Btech,M.E,Phd</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };
