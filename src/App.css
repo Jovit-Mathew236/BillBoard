@@ -2,12 +2,15 @@
   margin: 0%;
   padding: 0%;
 }
-html{
+
+html {
   /* transform: rotate(270deg); */
   display: flex;
   justify-content: center;
   align-items: center;
+  height: -webkit-fill-available;
 }
+
 #root {
   max-height: 1280px;
   min-width: 720px;
