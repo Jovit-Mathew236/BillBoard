@@ -16,7 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-// const updateUser = (displayName) => {
+// const updateUser = (displayName: string) => {
 //   updateProfile(auth.currentUser, {
 //     displayName: displayName,
 //   })
