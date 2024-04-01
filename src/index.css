@@ -16,6 +16,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* transform: rotate(-90deg); */
+  transform: scale(.5);
 }
 
 @font-face {
