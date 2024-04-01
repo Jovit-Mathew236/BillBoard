@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getWeather } from "../services/api";
 import styles from "./display.module.css";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../../../firebase/config";
 
 type WeatherData = {
@@ -36,17 +36,19 @@ const Display: React.FC = () => {
     const fetchUserData = async () => {
       try {
         const userCollectionRef = collection(db, "fields");
-        const q = query(userCollectionRef, orderBy("name"));
+        const q = query(userCollectionRef);
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
           const newData: UserData[] = [];
-          querySnapshot.forEach((doc) => {
-            newData.push({
-              id: doc.id,
-              name: doc.data().name,
-              specializedIn: doc.data().specializedIn,
+          querySnapshot.docs
+            .sort((a, b) => a.id.localeCompare(b.id)) // Sort documents by ID
+            .forEach((doc) => {
+              newData.push({
+                id: doc.id,
+                name: doc.data().name,
+                specializedIn: doc.data().specializedIn,
+              });
             });
-          });
           setUserData(newData);
         });
 
