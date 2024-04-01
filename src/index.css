@@ -15,7 +15,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transform: rotate(-90deg);
+  /* transform: rotate(-90deg); */
 }
 
 @font-face {
