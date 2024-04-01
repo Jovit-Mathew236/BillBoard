@@ -1,6 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getWeather } from "../services/api";
 import styles from "./display.module.css";
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { db } from "../../../firebase/config";
 
 type WeatherData = {
   Temperature: {
@@ -19,9 +21,43 @@ type WeatherData = {
   IsDaylight: boolean;
 };
 
-const Display = () => {
-  const [weatherData, setWeatherData] = useState([] as WeatherData[]);
+type UserData = {
+  id: string;
+  name: string;
+  specializedIn: string;
+};
+
+const Display: React.FC = () => {
+  const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [currentTime, setCurrentTime] = useState<string>("");
+  const [userData, setUserData] = useState<UserData[]>([]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userCollectionRef = collection(db, "fields");
+        const q = query(userCollectionRef, orderBy("name"));
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          const newData: UserData[] = [];
+          querySnapshot.forEach((doc) => {
+            newData.push({
+              id: doc.id,
+              name: doc.data().name,
+              specializedIn: doc.data().specializedIn,
+            });
+          });
+          setUserData(newData);
+        });
+
+        return () => unsubscribe(); // Unsubscribe from the snapshot listener when component unmounts
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
 
   useEffect(() => {
     const timerId = setInterval(() => {
@@ -53,9 +89,11 @@ const Display = () => {
 
     fetchWeather();
   }, []);
+
   const fahrenheitToCelsius = (fahrenheit: number): number => {
     return ((fahrenheit - 32) * 5) / 9;
   };
+
   return (
     <div className={styles.displayScreen}>
       {weatherData.length === 0 ? (
@@ -81,7 +119,6 @@ const Display = () => {
                   </>
                 )}
                 <br />
-                {/* month */}
                 {weatherData.length > 0 && (
                   <>
                     {new Date(
@@ -108,10 +145,7 @@ const Display = () => {
             <div className={styles.container3}>
               <p className={styles.img}></p>
               <p className={styles.status}>
-                {
-                  // status
-                  weatherData.length > 0 && <>{weatherData[0].IconPhrase}</>
-                }
+                {weatherData.length > 0 && <>{weatherData[0].IconPhrase}</>}
               </p>
             </div>
             <div className={styles.container4}>
@@ -123,30 +157,12 @@ const Display = () => {
               <div className={styles.details}>
                 <h3>Faculty</h3>
                 <div className={styles.faculties}>
-                  <div className={styles.faculty}>
-                    <h4>Dr. Giby Jose</h4>
-                    <p>Btech,M.E,Phd</p>
-                  </div>
-                  <div className={styles.faculty}>
-                    <h4>Shilpa Lizbeth George</h4>
-                    <p>Btech,MTech</p>
-                  </div>
-                  <div className={styles.faculty}>
-                    <h4>Soya Treesa Joseph</h4>
-                    <p>Btech,MTech</p>
-                  </div>
-                  <div className={styles.faculty}>
-                    <h4>Ashitha Jose</h4>
-                    <p>Btech,MTech</p>
-                  </div>
-                  <div className={styles.faculty}>
-                    <h4>Ancy Mathew</h4>
-                    <p>Btech,M.E,Phd</p>
-                  </div>
-                  <div className={styles.faculty}>
-                    <h4>Tinu Thomas</h4>
-                    <p>Btech,M.E,Phd</p>
-                  </div>
+                  {userData.map((user) => (
+                    <div key={user.id} className={styles.faculty}>
+                      <h4>{user.name}</h4>
+                      <p>{user.specializedIn}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
