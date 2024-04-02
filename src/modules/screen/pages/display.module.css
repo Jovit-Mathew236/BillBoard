@@ -161,6 +161,7 @@
             /* transform-style: preserve-3d; */
             transform: rotateY(0deg);
             animation: flip 10s infinite;
+            overflow-y: scroll;
 
             .details {
                 position: absolute;
