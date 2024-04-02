@@ -26,16 +26,23 @@ type UserData = {
   name: string;
   specializedIn: string;
 };
+type PositionData = {
+  id: string;
+  position: string;
+  count: string;
+};
 
 const Display: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [currentTime, setCurrentTime] = useState<string>("");
   const [userData, setUserData] = useState<UserData[]>([]);
+  const [positionData, setPositionData] = useState<PositionData[]>([]);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const userCollectionRef = collection(db, "fields");
+
         const q = query(userCollectionRef);
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
@@ -60,6 +67,36 @@ const Display: React.FC = () => {
 
     fetchUserData();
   }, []);
+
+  useEffect(() => {
+    const fetchPositionData = async () => {
+      try {
+        const positionCollectionRef = collection(db, "position");
+        const q = query(positionCollectionRef);
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          const newData: PositionData[] = [];
+          querySnapshot.docs
+            .sort((a, b) => a.id.localeCompare(b.id)) // Sort documents by ID
+            .forEach((doc) => {
+              newData.push({
+                id: doc.id,
+                position: doc.data().position,
+                count: doc.data().count,
+              });
+            });
+          setPositionData(newData);
+        });
+
+        return () => unsubscribe(); // Unsubscribe from the snapshot listener when component unmounts
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchPositionData();
+  }, []);
+  console.log(positionData);
 
   useEffect(() => {
     const timerId = setInterval(() => {
@@ -158,10 +195,13 @@ const Display: React.FC = () => {
               <div className={styles.details}>
                 <h3>Staff Positions</h3>
                 <div>
-                  <p>Professor : Nil</p>
-                  <p>Asso.Prof : 01</p>
-                  <p>Asst.Prof: 05</p>
-                  <p>Supporting Staff: 02</p>
+                  {positionData.map((position) => {
+                    return (
+                      <p>
+                        {position.position}: {position.count}
+                      </p>
+                    );
+                  })}
                 </div>
               </div>
             </div>
