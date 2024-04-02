@@ -138,6 +138,18 @@
             grid-area: box6;
             border-radius: 30px;
             background-color: #fff;
+
+            .details {
+                text-align: left;
+                padding: 30px;
+                font-size: 21px;
+                position: absolute;
+                background-color: unset;
+
+                & div {
+                    background-color: unset;
+                }
+            }
         }
 
         .container7 {

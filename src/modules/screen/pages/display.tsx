@@ -154,7 +154,17 @@ const Display: React.FC = () => {
               <p id="time">{currentTime}</p>
             </div>
             <div className={styles.container5}></div>
-            <div className={styles.container6}></div>
+            <div className={styles.container6}>
+              <div className={styles.details}>
+                <h3>Staff Positions</h3>
+                <div>
+                  <p>Professor : 02</p>
+                  <p>Asst.Prof : 02</p>
+                  <p>Asst.Prof: 15</p>
+                  <p>Supporting Staff: 06</p>
+                </div>
+              </div>
+            </div>
             <div className={styles.container7}>
               <div className={styles.details}>
                 <h3>Faculty</h3>
