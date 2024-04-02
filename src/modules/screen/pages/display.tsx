@@ -158,10 +158,10 @@ const Display: React.FC = () => {
               <div className={styles.details}>
                 <h3>Staff Positions</h3>
                 <div>
-                  <p>Professor : 02</p>
-                  <p>Asst.Prof : 02</p>
-                  <p>Asst.Prof: 15</p>
-                  <p>Supporting Staff: 06</p>
+                  <p>Professor : Nil</p>
+                  <p>Asso.Prof : 01</p>
+                  <p>Asst.Prof: 05</p>
+                  <p>Supporting Staff: 02</p>
                 </div>
               </div>
             </div>
