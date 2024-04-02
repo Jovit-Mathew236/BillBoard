@@ -123,7 +123,7 @@
         .container5 {
             grid-area: box5;
             border-radius: 30px;
-            background-image: url(../assets/img.png);
+            background-image: url(../assets/aleena.jpg);
             background-size: cover;
             background-position: top;
             height: 100%;
@@ -163,6 +163,8 @@
             animation: flip 10s infinite;
             overflow-y: scroll;
 
+
+
             .details {
                 position: absolute;
                 height: 100%;
@@ -191,6 +193,10 @@
         }
     }
 
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 /* @keyframes flip {
