@@ -1,12 +1,16 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --bg-image: url(../src/modules/screen/assets/bg.webp);
+  /* Default image */
+  --font-family: 'CalSans-SemiBold';
+  /* Default font */
+
+  font-family: var(--font-family), system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #CCCCCC;
-  background-image: url(../src/modules/screen/assets/bg.png);
+  background-image: var(--bg-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -22,15 +26,19 @@
 @font-face {
   font-family: 'ndot-47';
   src: url('/src/fonts/ndot-47.woff') format('woff');
-  /* url('/Fonts/NeueMachina-Regular.woff') format('woff'), */
-  /* url('/Fonts/NeueMachina-Ultrabold.woff') format('woff'); */
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CalSans-SemiBold';
+  src: url('/src/fonts/CalSans-SemiBold.woff2') format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 body {
-  font-family: ndot-47;
+  font-family: var(--font-family), system-ui, Helvetica, Arial, sans-serif;
   display: flex;
-  /* align-items: center; */
   justify-content: center;
 }

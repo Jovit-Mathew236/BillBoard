@@ -15,7 +15,7 @@
     .error {
         color: red;
         font-size: 20px;
-        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        /* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
     }
 
     & h4 {
@@ -23,7 +23,8 @@
     }
 
     .title {
-        line-height: 40px;
+        font-size: 30px;
+        line-height: 80px;
         margin: 20px 0px;
     }
 
@@ -43,7 +44,7 @@
         gap: 20px;
         /* background-color: white; */
         padding: 10px;
-        font-family: 'Space Mono', monospace;
+        /* font-family: 'Space Mono', monospace; */
 
 
         & div {
@@ -170,6 +171,7 @@
                 height: 100%;
                 width: 100%;
                 border-radius: 30px;
+                padding-top: 10px;
 
                 .faculties {
                     text-align: left;
@@ -178,9 +180,9 @@
                     flex-direction: column;
                     gap: 10px;
 
-                    & h4 {
+                    /* & h4 {
                         font-family: ndot-47;
-                    }
+                    } */
 
                     & p {
                         background-color: #fff;
@@ -210,3 +212,33 @@
         transform: rotateY(0deg);
     }
 } */
+
+
+/* Add these styles to your CSS file */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 1s forwards;
+}
+
+.fade-out {
+    animation: fadeOut 1s forwards;
+}
