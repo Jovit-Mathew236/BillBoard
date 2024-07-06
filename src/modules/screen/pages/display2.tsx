@@ -172,23 +172,23 @@ const Display2: React.FC = () => {
 
   return (
     <div className={styles.displayScreen}>
-      {weatherData.length === 0 ? (
+      {/* {weatherData.length === 0 ? (
         <p className={styles.error}>API IS NOT WORKING</p>
-      ) : (
-        <>
-          <p style={{ fontSize: "30px", color: "#fff" }}>Department of</p>
-          <h3
-            style={{ fontSize: "50px", color: "#fff" }}
-            className={styles.title}
-          >
-            ELECTRONICS &
-            <br />
-            COMPUTER
-          </h3>
-          <div
-            className={styles.components}
-            style={{
-              gridTemplateAreas: `
+      ) : ( */}
+      <>
+        <p style={{ fontSize: "30px", color: "#fff" }}>Department of</p>
+        <h3
+          style={{ fontSize: "50px", color: "#fff" }}
+          className={styles.title}
+        >
+          ELECTRONICS &
+          <br />
+          COMPUTER
+        </h3>
+        <div
+          className={styles.components}
+          style={{
+            gridTemplateAreas: `
       'box6 box6 box7 box7'
       'box6 box6 box7 box7'
       'box5 box5 box7 box7'
@@ -196,137 +196,137 @@ const Display2: React.FC = () => {
       'box1 box1 box1 box1'
       'box2 box2 box4 box4'
     `,
+          }}
+        >
+          <div
+            style={{
+              justifyContent: "space-around",
+              backgroundColor: "#fff",
             }}
+            className={styles.container1}
           >
-            <div
-              style={{
-                justifyContent: "space-around",
-                backgroundColor: "#fff",
-              }}
-              className={styles.container1}
-            >
-              <p style={{ position: "unset", color: "#000" }}>
-                {weatherData.length > 0 && (
-                  <>
-                    {new Date(
-                      weatherData[0].EpochDateTime * 1000
-                    ).toLocaleString("default", {
+            <p style={{ position: "unset", color: "#000" }}>
+              {weatherData.length > 0 && (
+                <>
+                  {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
+                    "default",
+                    {
                       weekday: "long",
-                    })}
-                  </>
-                )}
-              </p>
-              <p style={{ position: "unset", color: "#000" }}>
-                {weatherData.length > 0 && (
-                  <>
-                    {fahrenheitToCelsius(
-                      weatherData[0].Temperature.Value
-                    ).toFixed(0)}
-                    &#176;C
-                  </>
-                )}
-              </p>
-              <p style={{ position: "unset", color: "#000" }}>
-                {weatherData.length > 0 && (
-                  <>
-                    {new Date(
-                      weatherData[0].EpochDateTime * 1000
-                    ).toLocaleString("default", {
+                    }
+                  )}
+                </>
+              )}
+            </p>
+            <p style={{ position: "unset", color: "#000" }}>
+              {weatherData.length > 0 && (
+                <>
+                  {fahrenheitToCelsius(
+                    weatherData[0].Temperature.Value
+                  ).toFixed(0)}
+                  &#176;C
+                </>
+              )}
+            </p>
+            <p style={{ position: "unset", color: "#000" }}>
+              {weatherData.length > 0 && (
+                <>
+                  {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
+                    "default",
+                    {
                       month: "short",
-                    })}
-                  </>
-                )}{" "}
-                {weatherData.length > 0 && (
-                  <>
-                    {new Date(
-                      weatherData[0].EpochDateTime * 1000
-                    ).toLocaleString("default", {
+                    }
+                  )}
+                </>
+              )}{" "}
+              {weatherData.length > 0 && (
+                <>
+                  {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
+                    "default",
+                    {
                       day: "2-digit",
-                    })}
-                  </>
-                )}
-              </p>
-            </div>
-            <div
-              style={{ backgroundColor: "#000" }}
-              className={styles.container2}
-            >
-              <p style={{ color: "#fff" }}>
-                NIFTY50{" "}
-                <span style={{ fontSize: "30px", color: "limegreen" }}>
-                  +21.70
-                </span>
-              </p>
-            </div>
-            {/* <div className={styles.container3}>
+                    }
+                  )}
+                </>
+              )}
+            </p>
+          </div>
+          <div
+            style={{ backgroundColor: "#000" }}
+            className={styles.container2}
+          >
+            <p style={{ color: "#fff" }}>
+              NIFTY50{" "}
+              <span style={{ fontSize: "30px", color: "limegreen" }}>
+                +21.70
+              </span>
+            </p>
+          </div>
+          {/* <div className={styles.container3}>
               <p className={styles.img}></p>
               <p className={styles.status}>
                 {weatherData.length > 0 && <>{weatherData[0].IconPhrase}</>}
               </p>
             </div> */}
-            <div style={{ borderRadius: "20px" }} className={styles.container4}>
-              <p id="time">{currentTime}</p>
-            </div>
-            <div className={styles.container5}></div>
-            <div className={styles.container6}>
-              <div className={styles.details}>
-                <h3>Staff Positions</h3>
-                <div>
-                  {positionData.map((position) => {
-                    return (
-                      <p>
-                        {position.position}: {position.count}
-                      </p>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-            <div className={styles.container7}>
-              <div
-                style={{ backgroundColor: "#fff" }}
-                className={styles.details}
-              >
-                <h3
-                  style={{
-                    fontSize: "35px",
-                    backgroundColor: "#fff",
-                    color: "#000",
-                  }}
-                >
-                  Faculty
-                </h3>
-                <div
-                  style={{ backgroundColor: "#fff" }}
-                  className={styles.faculties}
-                >
-                  {currentGroup.map((user) => (
-                    <div
-                      style={{
-                        fontSize: "25px",
-                        backgroundColor: "#fff",
-                        color: "#000",
-                      }}
-                      key={user.id}
-                      className={`${styles.faculty} ${fadeState}`}
-                    >
-                      <h4>{user.name}</h4>
-                      <p
-                        style={{
-                          padding: "0",
-                          color: "#7D92E1",
-                        }}
-                      >
-                        {user.specializedIn}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+          <div style={{ borderRadius: "20px" }} className={styles.container4}>
+            <p id="time">{currentTime}</p>
+          </div>
+          <div className={styles.container5}></div>
+          <div className={styles.container6}>
+            <div className={styles.details}>
+              <h3>Staff Positions</h3>
+              <div>
+                {positionData.map((position) => {
+                  return (
+                    <p>
+                      {position.position}: {position.count}
+                    </p>
+                  );
+                })}
               </div>
             </div>
           </div>
-        </>
-      )}
+          <div className={styles.container7}>
+            <div style={{ backgroundColor: "#fff" }} className={styles.details}>
+              <h3
+                style={{
+                  fontSize: "35px",
+                  backgroundColor: "#fff",
+                  color: "#000",
+                }}
+              >
+                Faculty
+              </h3>
+              <div
+                style={{ backgroundColor: "#fff" }}
+                className={styles.faculties}
+              >
+                {currentGroup.map((user) => (
+                  <div
+                    style={{
+                      fontSize: "25px",
+                      backgroundColor: "#fff",
+                      color: "#000",
+                    }}
+                    key={user.id}
+                    className={`${styles.faculty} ${fadeState}`}
+                  >
+                    <h4>{user.name}</h4>
+                    <p
+                      style={{
+                        padding: "0",
+                        color: "#7D92E1",
+                      }}
+                    >
+                      {user.specializedIn}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+      {/* // )} */}
     </div>
   );
 };
