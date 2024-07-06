@@ -158,106 +158,108 @@ const Display: React.FC = () => {
   const currentGroup = getCurrentGroup();
   return (
     <div className={styles.displayScreen}>
-      {weatherData.length === 0 ? (
+      {/* {weatherData.length === 0 ? (
         <p className={styles.error}>API IS NOT WORKING</p>
-      ) : (
-        <>
-          <p>Department of</p>
-          <h3 className={styles.title}>
-            ELECTRONICS &
-            <br />
-            COMPUTER
-          </h3>
-          <div className={styles.components}>
-            <div className={styles.container1}>
-              <p style={{ fontSize: "15px", lineHeight: "50px" }}>
-                {weatherData.length > 0 && (
-                  <>
-                    {new Date(
-                      weatherData[0].EpochDateTime * 1000
-                    ).toLocaleString("default", {
+      ) : ( */}
+      <>
+        <p>Department of</p>
+        <h3 className={styles.title}>
+          ELECTRONICS &
+          <br />
+          COMPUTER
+        </h3>
+        <div className={styles.components}>
+          <div className={styles.container1}>
+            <p style={{ fontSize: "15px", lineHeight: "50px" }}>
+              {weatherData.length > 0 && (
+                <>
+                  {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
+                    "default",
+                    {
                       day: "2-digit",
-                    })}
-                  </>
-                )}
-                <br />
-                {weatherData.length > 0 && (
-                  <>
-                    {new Date(
-                      weatherData[0].EpochDateTime * 1000
-                    ).toLocaleString("default", {
+                    }
+                  )}
+                </>
+              )}
+              <br />
+              {weatherData.length > 0 && (
+                <>
+                  {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
+                    "default",
+                    {
                       month: "short",
-                    })}
-                  </>
-                )}
-              </p>
-            </div>
-            <div className={styles.container2}>
-              <p style={{ fontSize: "15px", lineHeight: "50px" }}>
-                {weatherData.length > 0 && (
-                  <>
-                    {fahrenheitToCelsius(
-                      weatherData[0].Temperature.Value
-                    ).toFixed(0)}
-                    &#176;C
-                  </>
-                )}
-              </p>
-            </div>
-            <div className={styles.container3}>
-              <p className={styles.img}></p>
-              <p
-                style={{ fontSize: "15px", lineHeight: "50px" }}
-                className={styles.status}
-              >
-                {weatherData.length > 0 && <>{weatherData[0].IconPhrase}</>}
-              </p>
-            </div>
-            <div className={styles.container4}>
-              <p style={{ fontSize: "15px", lineHeight: "50px" }} id="time">
-                {currentTime}
-              </p>
-            </div>
-            <div className={styles.container5}></div>
-            <div className={styles.container6}>
-              <div
-                style={{ fontSize: "10px", lineHeight: "40px" }}
-                className={styles.details}
-              >
-                <h3>Staff Positions</h3>
-                <div>
-                  {positionData.map((position) => {
-                    return (
-                      <p>
-                        {position.position}: {position.count}
-                      </p>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-            <div className={styles.container7}>
-              <div className={styles.details}>
-                <h3>Faculty</h3>
-                <div
-                  style={{ fontSize: "12px", lineHeight: "50px" }}
-                  className={styles.faculties}
-                >
-                  {currentGroup.map((user) => (
-                    <div
-                      key={user.id}
-                      className={`${styles.faculty} ${fadeState}`}
-                    >
-                      <h4>{user.name}</h4>
-                      <p>{user.specializedIn}</p>
-                    </div>
-                  ))}
-                </div>
+                    }
+                  )}
+                </>
+              )}
+            </p>
+          </div>
+          <div className={styles.container2}>
+            <p style={{ fontSize: "15px", lineHeight: "50px" }}>
+              {weatherData.length > 0 && (
+                <>
+                  {fahrenheitToCelsius(
+                    weatherData[0].Temperature.Value
+                  ).toFixed(0)}
+                  &#176;C
+                </>
+              )}
+            </p>
+          </div>
+          <div className={styles.container3}>
+            <p className={styles.img}></p>
+            <p
+              style={{ fontSize: "15px", lineHeight: "50px" }}
+              className={styles.status}
+            >
+              {weatherData.length > 0 && <>{weatherData[0].IconPhrase}</>}
+            </p>
+          </div>
+          <div className={styles.container4}>
+            <p style={{ fontSize: "15px", lineHeight: "50px" }} id="time">
+              {currentTime}
+            </p>
+          </div>
+          <div className={styles.container5}></div>
+          <div className={styles.container6}>
+            <div
+              style={{ fontSize: "10px", lineHeight: "40px" }}
+              className={styles.details}
+            >
+              <h3>Staff Positions</h3>
+              <div>
+                {positionData.map((position) => {
+                  return (
+                    <p>
+                      {position.position}: {position.count}
+                    </p>
+                  );
+                })}
               </div>
             </div>
           </div>
-        </>
-      )}
+          <div className={styles.container7}>
+            <div className={styles.details}>
+              <h3>Faculty</h3>
+              <div
+                style={{ fontSize: "12px", lineHeight: "50px" }}
+                className={styles.faculties}
+              >
+                {currentGroup.map((user) => (
+                  <div
+                    key={user.id}
+                    className={`${styles.faculty} ${fadeState}`}
+                  >
+                    <h4>{user.name}</h4>
+                    <p>{user.specializedIn}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+      {/* )} */}
     </div>
   );
 };
