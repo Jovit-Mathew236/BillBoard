@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "./firebase/config";
 import Display2 from "./modules/screen/pages/display2";
-
 type ThemeData = {
   theme: number;
   layoutStyle: string;
@@ -41,9 +40,9 @@ function App() {
       const root = document.documentElement;
       root.style.setProperty(
         "--bg-image",
-        `url('/src/modules/screen/assets/${
+        `url(/src/modules/screen/assets/${
           themeData.theme === 1 ? "bg.png" : "bg.webp"
-        }')`
+        })`
       );
       root.style.setProperty(
         "--font-family",
