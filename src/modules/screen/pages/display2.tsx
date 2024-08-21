@@ -181,9 +181,9 @@ const Display2: React.FC = () => {
           style={{ fontSize: "50px", color: "#fff" }}
           className={styles.title}
         >
-          ELECTRONICS &
+          Electronics &
           <br />
-          COMPUTER
+          Computer Engineering
         </h3>
         <div
           className={styles.components}
