@@ -40,9 +40,7 @@ function App() {
       const root = document.documentElement;
       root.style.setProperty(
         "--bg-image",
-        `url(/src/modules/screen/assets/${
-          themeData.theme === 1 ? "bg.png" : "bg.webp"
-        })`
+        `url(/${themeData.theme === 1 ? "bg.png" : "bg.webp"})`
       );
       root.style.setProperty(
         "--font-family",
