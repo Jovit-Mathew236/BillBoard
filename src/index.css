@@ -1,5 +1,5 @@
 :root {
-  --bg-image: url(../src/modules/screen/assets/bg.webp);
+  --bg-image: url(/bg.webp);
   /* Default image */
   --font-family: 'CalSans-SemiBold';
   /* Default font */
