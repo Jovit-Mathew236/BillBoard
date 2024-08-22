@@ -154,18 +154,18 @@ const Display2: React.FC = () => {
     };
 
     fetchWeather();
-    // fetchNews();
-    // const fetchNIFTY = async () => {
-    //   try {
-    //     const data = await getNIFTY();
-    //     setNIFTYDATA(data);
-    //     console.log(NIFTYDATA);
-    //   } catch (error) {
-    //     console.error("Failed to fetch weather:", error);
-    //   }
-    // };
+    fetchNews();
+    const fetchNIFTY = async () => {
+      try {
+        const data = await getNIFTY();
+        setNIFTYDATA(data);
+        console.log(NIFTYDATA);
+      } catch (error) {
+        console.error("Failed to fetch weather:", error);
+      }
+    };
 
-    // fetchNIFTY();
+    fetchNIFTY();
   }, []);
 
   useEffect(() => {
