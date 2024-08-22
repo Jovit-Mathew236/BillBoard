@@ -209,7 +209,13 @@ const Display: React.FC = () => {
         </h3>
         <div className={styles.components}>
           <div className={styles.container1}>
-            <p style={{ fontSize: "15px", lineHeight: "50px" }}>
+            <p
+              style={{
+                fontSize: "15px",
+                lineHeight: "50px",
+                position: "absolute",
+              }}
+            >
               {weatherData.length > 0 && (
                 <>
                   {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(

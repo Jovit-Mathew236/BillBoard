@@ -3,7 +3,7 @@ import { getNews, getNIFTY, getWeather } from "../services/api";
 import styles from "./display.module.css";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../../../firebase/config";
-import Marquee from "react-fast-marquee";
+// import Marquee from "react-fast-marquee";
 
 import { IndexData } from "../../../enum";
 
@@ -60,6 +60,9 @@ type PositionData = {
 const Display2: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [newsData, setNewsData] = useState<NewsData["data"]>([]);
+  const [currentDisplayIndex, setCurrentDisplayIndex] = useState(0);
+  const [displayFadeState, setDisplayFadeState] = useState("fade-in");
+  const [isShowingNews, setIsShowingNews] = useState(true);
   const [NIFTYDATA, setNIFTYDATA] = useState<IndexData>();
   const [currentTime, setCurrentTime] = useState<string>("");
   const [userData, setUserData] = useState<UserData[]>([]);
@@ -176,9 +179,27 @@ const Display2: React.FC = () => {
         console.error("Failed to fetch news:", error);
       }
     };
+
     fetchNews();
-    // console.log(newsData);
   }, []);
+
+  useEffect(() => {
+    if (newsData.length === 0 || weatherData.length === 0) return;
+
+    const intervalId = setInterval(() => {
+      setDisplayFadeState("fade-out");
+
+      setTimeout(() => {
+        setIsShowingNews((prev) => !prev);
+        setCurrentDisplayIndex((prevIndex) => {
+          return (prevIndex + 1) % 3; // Loop through 3 news items
+        });
+        setDisplayFadeState("fade-in");
+      }, 1000); // Duration of the fade-out animation
+    }, 5000); // Change every 5 seconds
+
+    return () => clearInterval(intervalId);
+  }, [newsData.length, weatherData.length, isShowingNews]);
 
   const fahrenheitToCelsius = (fahrenheit: number): number => {
     return ((fahrenheit - 32) * 5) / 9;
@@ -241,52 +262,39 @@ const Display2: React.FC = () => {
               justifyContent: "space-around",
               backgroundColor: "#fff",
             }}
-            className={styles.container1}
+            className={`${styles.container1} ${displayFadeState}`}
           >
-            <p style={{ position: "unset", color: "#000" }}>
-              {weatherData.length > 0 && (
-                <>
+            {isShowingNews && newsData.length > 0 ? (
+              <>
+                <h4>{newsData[currentDisplayIndex].title}</h4>
+                {/* <p>{newsData[currentDisplayIndex].description}</p> */}
+              </>
+            ) : weatherData.length > 0 ? (
+              <>
+                <p style={{ color: "#000" }}>
                   {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
                     "default",
-                    {
-                      weekday: "long",
-                    }
+                    { weekday: "long" }
                   )}
-                </>
-              )}
-            </p>
-            <p style={{ position: "unset", color: "#000" }}>
-              {weatherData.length > 0 && (
-                <>
+                </p>
+                <p style={{ color: "#000" }}>
                   {fahrenheitToCelsius(
                     weatherData[0].Temperature.Value
                   ).toFixed(0)}
                   &#176;C
-                </>
-              )}
-            </p>
-            <p style={{ position: "unset", color: "#000" }}>
-              {weatherData.length > 0 && (
-                <>
+                </p>
+                <p style={{ color: "#000" }}>
                   {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
                     "default",
-                    {
-                      month: "short",
-                    }
-                  )}
-                </>
-              )}{" "}
-              {weatherData.length > 0 && (
-                <>
+                    { month: "short" }
+                  )}{" "}
                   {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
                     "default",
-                    {
-                      day: "2-digit",
-                    }
+                    { day: "2-digit" }
                   )}
-                </>
-              )}
-            </p>
+                </p>
+              </>
+            ) : null}
           </div>
           <div
             style={{ backgroundColor: "#000" }}
@@ -363,7 +371,7 @@ const Display2: React.FC = () => {
             </div>
           </div>
         </div>
-        <Marquee speed={0.5} style={{ color: "#fff" }}>
+        {/* <Marquee speed={10} style={{ color: "#fff" }}>
           {newsData.map((news, index) => (
             <span key={news.uuid} className={styles.marquee__item}>
               {news.title}
@@ -372,9 +380,9 @@ const Display2: React.FC = () => {
                 : ""}{" "}
             </span>
           ))}
-        </Marquee>
+        </Marquee> */}
       </>
-      {/* // )} */}
+      {/* )} */}
     </div>
   );
 };
