@@ -154,7 +154,6 @@ const Display2: React.FC = () => {
     };
 
     fetchWeather();
-    fetchNews();
     const fetchNIFTY = async () => {
       try {
         const data = await getNIFTY();
