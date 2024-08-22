@@ -61,17 +61,25 @@
             padding: 20px;
             box-sizing: border-box;
 
-            & p {
-                /* position: absolute; */
-                font-size: 40px;
-                color: white;
-            }
+            & section {
+                display: flex;
+                /* align-items: ; */
+                width: 100%;
+                justify-content: space-around;
+                height: 50px;
 
-            & h4 {
-                /* position: absolute; */
-                font-size: 24px;
-                line-height: 30px;
-                color: black;
+                & p {
+                    /* position: absolute; */
+                    font-size: 40px;
+                    color: white;
+                }
+
+                & h4 {
+                    /* position: absolute; */
+                    font-size: 24px;
+                    line-height: 30px;
+                    color: black;
+                }
             }
         }
 
@@ -245,10 +253,12 @@
     }
 }
 
-.fade-in {
-    animation: fadeIn 1s forwards;
+.fade_in {
+    opacity: 1;
+    transition: opacity 1s ease-in;
 }
 
-.fade-out {
-    animation: fadeOut 1s forwards;
+.fade_out {
+    opacity: 0;
+    transition: opacity 1s ease-out;
 }

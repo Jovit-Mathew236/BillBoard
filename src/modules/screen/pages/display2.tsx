@@ -61,7 +61,7 @@ const Display2: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
   const [newsData, setNewsData] = useState<NewsData["data"]>([]);
   const [currentDisplayIndex, setCurrentDisplayIndex] = useState(0);
-  const [displayFadeState, setDisplayFadeState] = useState("fade-in");
+  const [displayFadeState, setDisplayFadeState] = useState(true);
   const [isShowingNews, setIsShowingNews] = useState(true);
   const [NIFTYDATA, setNIFTYDATA] = useState<IndexData>();
   const [currentTime, setCurrentTime] = useState<string>("");
@@ -187,16 +187,16 @@ const Display2: React.FC = () => {
     if (newsData.length === 0 || weatherData.length === 0) return;
 
     const intervalId = setInterval(() => {
-      setDisplayFadeState("fade-out");
+      setDisplayFadeState(false);
 
       setTimeout(() => {
         setIsShowingNews((prev) => !prev);
         setCurrentDisplayIndex((prevIndex) => {
           return (prevIndex + 1) % 3; // Loop through 3 news items
         });
-        setDisplayFadeState("fade-in");
+        setDisplayFadeState(true);
       }, 1000); // Duration of the fade-out animation
-    }, 5000); // Change every 5 seconds
+    }, 7500); // Change every 5 seconds
 
     return () => clearInterval(intervalId);
   }, [newsData.length, weatherData.length, isShowingNews]);
@@ -205,19 +205,19 @@ const Display2: React.FC = () => {
     return ((fahrenheit - 32) * 5) / 9;
   };
   const [currentGroupIndex, setCurrentGroupIndex] = useState(0);
-  const [fadeState, setFadeState] = useState("fade-in");
+  const [fadeState, setFadeState] = useState(true);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setFadeState("fade-out");
+      setFadeState(false);
 
       setTimeout(() => {
         setCurrentGroupIndex(
           (prevIndex) => (prevIndex + 1) % Math.ceil(userData.length / 5)
         );
-        setFadeState("fade-in");
+        setFadeState(true);
       }, 1000); // Duration of the fade-out animation
-    }, 5000); // Change every 5 seconds
+    }, 10000); // Change every 10 seconds
 
     return () => clearInterval(intervalId);
   }, [userData.length]);
@@ -262,15 +262,23 @@ const Display2: React.FC = () => {
               justifyContent: "space-around",
               backgroundColor: "#fff",
             }}
-            className={`${styles.container1} ${displayFadeState}`}
+            className={styles.container1}
           >
             {isShowingNews && newsData.length > 0 ? (
-              <>
+              <section
+                className={` ${
+                  displayFadeState ? styles.fade_in : styles.fade_out
+                }`}
+              >
                 <h4>{newsData[currentDisplayIndex].title}</h4>
                 {/* <p>{newsData[currentDisplayIndex].description}</p> */}
-              </>
+              </section>
             ) : weatherData.length > 0 ? (
-              <>
+              <section
+                className={` ${
+                  displayFadeState ? styles.fade_in : styles.fade_out
+                }`}
+              >
                 <p style={{ color: "#000" }}>
                   {new Date(weatherData[0].EpochDateTime * 1000).toLocaleString(
                     "default",
@@ -293,7 +301,7 @@ const Display2: React.FC = () => {
                     { day: "2-digit" }
                   )}
                 </p>
-              </>
+              </section>
             ) : null}
           </div>
           <div
@@ -354,7 +362,9 @@ const Display2: React.FC = () => {
                       color: "#000",
                     }}
                     key={user.id}
-                    className={`${styles.faculty} ${fadeState}`}
+                    className={` ${
+                      fadeState ? styles.fade_in : styles.fade_out
+                    }`}
                   >
                     <h4>{user.name}</h4>
                     <p
