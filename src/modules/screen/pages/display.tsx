@@ -3,7 +3,7 @@ import { getNews, getWeather } from "../services/api";
 import styles from "./display.module.css";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../../../firebase/config";
-// import Marquee from "react-fast-marquee";
+import Marquee from "react-fast-marquee";
 
 type WeatherData = {
   Temperature: {
@@ -303,7 +303,7 @@ const Display: React.FC = () => {
             </div>
           </div>
         </div>
-        {/* <Marquee speed={0.5} style={{ color: "#fff" }}>
+        <Marquee speed={0.5} style={{ color: "#fff" }}>
           {newsData.map((news, index) => (
             <span key={news.uuid} className={styles.marquee__item}>
               {news.title}
@@ -312,7 +312,7 @@ const Display: React.FC = () => {
                 : ""}{" "}
             </span>
           ))}
-        </Marquee> */}
+        </Marquee>
       </>
       {/* )} */}
     </div>
