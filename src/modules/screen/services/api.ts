@@ -38,3 +38,22 @@ export const getNIFTY = async () => {
     throw error;
   }
 };
+export const getNews = async () => {
+  try {
+    const response = await axios.get(
+      "https://api.thenewsapi.com/v1/news/top?api_token=uqflFIQhilhsiQocwyy2yPSZlwaRA1gLcaENKPQM&locale=in&limit=3&categories=business,sports,tech,general&exclude_domains=dnaindia.com"
+    );
+
+    // Check if response status is not OK
+    if (response.status !== 200) {
+      throw new Error("Failed to fetch news data");
+    }
+    const data = response.data;
+    // Find the first entry with the key "BROAD MARKET INDICES"
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching News data:", error);
+    throw error;
+  }
+};
