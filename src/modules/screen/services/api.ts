@@ -41,7 +41,7 @@ export const getNIFTY = async () => {
 export const getNews = async () => {
   try {
     const response = await axios.get(
-      "https://api.thenewsapi.com/v1/news/top?api_token=BRCQ1LJMRgGiDf1I9XOlsYOTGJTzwniSyiwFe1y2&locale=in&limit=3&categories=business,sports,tech,general&exclude_domains=dnaindia.com"
+      "https://api.thenewsapi.com/v1/news/top?api_token=d5wP5LsdfHb662Krn2hufBpzWNHTXNJAJsqxPjxp&locale=in&limit=3&categories=business,sports,tech,general&exclude_domains=dnaindia.com"
     );
 
     // Check if response status is not OK
