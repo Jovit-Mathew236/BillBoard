@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getNIFTY, getWeather } from "../services/api";
+import { getNews, getNIFTY, getWeather } from "../services/api";
 import styles from "./display.module.css";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../../../firebase/config";
+import Marquee from "react-fast-marquee";
+
 import { IndexData } from "../../../enum";
 
 type WeatherData = {
@@ -21,7 +23,29 @@ type WeatherData = {
   IconPhrase: string;
   IsDaylight: boolean;
 };
-
+type NewsData = {
+  meta: {
+    found: number;
+    returned: number;
+    limit: number;
+    page: number;
+  };
+  data: Array<{
+    uuid: string;
+    title: string;
+    description: string;
+    keywords: string;
+    snippet: string;
+    url: string;
+    image_url: string;
+    language: string;
+    published_at: string;
+    source: string;
+    categories: string[];
+    relevance_score: number | null;
+    locale: string;
+  }>;
+};
 type UserData = {
   id: string;
   name: string;
@@ -35,6 +59,7 @@ type PositionData = {
 
 const Display2: React.FC = () => {
   const [weatherData, setWeatherData] = useState<WeatherData[]>([]);
+  const [newsData, setNewsData] = useState<NewsData["data"]>([]);
   const [NIFTYDATA, setNIFTYDATA] = useState<IndexData>();
   const [currentTime, setCurrentTime] = useState<string>("");
   const [userData, setUserData] = useState<UserData[]>([]);
@@ -140,6 +165,19 @@ const Display2: React.FC = () => {
     };
 
     fetchNIFTY();
+  }, []);
+
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const data = await getNews();
+        setNewsData(data.data);
+      } catch (error) {
+        console.error("Failed to fetch news:", error);
+      }
+    };
+    fetchNews();
+    // console.log(newsData);
   }, []);
 
   const fahrenheitToCelsius = (fahrenheit: number): number => {
@@ -325,6 +363,16 @@ const Display2: React.FC = () => {
             </div>
           </div>
         </div>
+        <Marquee speed={0.5} style={{ color: "#fff" }}>
+          {newsData.map((news, index) => (
+            <span key={news.uuid} className={styles.marquee__item}>
+              {news.title}
+              {index < newsData.length - 1
+                ? "\u00A0\u00A0\u00A0•\u00A0\u00A0\u00A0"
+                : ""}{" "}
+            </span>
+          ))}
+        </Marquee>
       </>
       {/* )} */}
     </div>
