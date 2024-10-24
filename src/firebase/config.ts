@@ -3,14 +3,14 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDLGN_vuilv50OMRBSVwzZCu2iI16EbgiQ",
-  authDomain: "mini-test-331ad.firebaseapp.com",
+  apiKey: "AIzaSyCFaKm-nR7oHoLAt4hKUi16UOiRLNRR0-E",
+  authDomain: "billboard-4b946.firebaseapp.com",
   databaseURL:
-    "https://mini-test-331ad-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "mini-test-331ad",
-  storageBucket: "mini-test-331ad.appspot.com",
-  messagingSenderId: "221131832138",
-  appId: "1:221131832138:web:2dc86b9cc0b881063c1fb3",
+    "https://billboard-4b946-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "billboard-4b946",
+  storageBucket: "billboard-4b946.appspot.com",
+  messagingSenderId: "845867566544",
+  appId: "1:845867566544:web:a1be3106a464e7d518e5d5",
 };
 
 const app = initializeApp(firebaseConfig);
