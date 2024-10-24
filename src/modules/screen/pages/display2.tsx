@@ -71,8 +71,15 @@ const Display2: React.FC = () => {
   const [currentTime, setCurrentTime] = useState<string>("");
   const [userData, setUserData] = useState<UserData[]>([]);
   const [imageData, setImageData] = useState<ImageData[]>([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [positionData, setPositionData] = useState<PositionData[]>([]);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % imageData.length);
+    }, 5000); // Change every 5 seconds
 
+    return () => clearInterval(intervalId);
+  }, [imageData.length]);
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -355,17 +362,14 @@ const Display2: React.FC = () => {
             <p id="time">{currentTime}</p>
           </div>
           <div className={styles.container5}>
-            {imageData.map((data, i) => {
-              return (
-                <img
-                  key={i}
-                  src={data.imageUrl}
-                  alt=""
-                  width={"10%"}
-                  height={"200px"}
-                />
-              );
-            })}
+            {imageData.length > 0 && (
+              <img
+                src={imageData[currentImageIndex].imageUrl}
+                alt=""
+                width={"10%"}
+                height={"200px"}
+              />
+            )}
           </div>
 
           <div className={styles.container6}>
