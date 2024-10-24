@@ -151,6 +151,17 @@
             display: flex;
             border: 10px solid #fff;
             box-sizing: border-box;
+            position: relative;
+
+            & img {
+                position: absolute;
+                object-fit: cover;
+                height: 100%;
+                width: 100%;
+                border-radius: 30px;
+                /* border: 10px solid #fff; */
+                box-sizing: border-box;
+            }
         }
 
         .container6 {

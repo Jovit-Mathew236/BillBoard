@@ -51,6 +51,10 @@ type UserData = {
   name: string;
   specializedIn: string;
 };
+type ImageData = {
+  id: string;
+  imageUrl: string;
+};
 type PositionData = {
   id: string;
   position: string;
@@ -62,6 +66,7 @@ const Display: React.FC = () => {
   const [newsData, setNewsData] = useState<NewsData["data"]>([]);
   const [currentTime, setCurrentTime] = useState<string>("");
   const [userData, setUserData] = useState<UserData[]>([]);
+  const [imageData, setImageData] = useState<ImageData[]>([]);
   const [positionData, setPositionData] = useState<PositionData[]>([]);
 
   useEffect(() => {
@@ -91,7 +96,33 @@ const Display: React.FC = () => {
       }
     };
 
+    const fetchImageData = async () => {
+      try {
+        const userCollectionRef = collection(db, "images");
+
+        const q = query(userCollectionRef);
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          const newData: ImageData[] = [];
+          querySnapshot.docs
+            .sort((a, b) => a.id.localeCompare(b.id)) // Sort documents by ID
+            .forEach((doc) => {
+              newData.push({
+                id: doc.id,
+                imageUrl: doc.data().imageUrl,
+              });
+            });
+          setImageData(newData);
+        });
+
+        return () => unsubscribe(); // Unsubscribe from the snapshot listener when component unmounts
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
     fetchUserData();
+    fetchImageData();
   }, []);
 
   useEffect(() => {
@@ -265,7 +296,19 @@ const Display: React.FC = () => {
               {currentTime}
             </p>
           </div>
-          <div className={styles.container5}></div>
+          <div className={styles.container5}>
+            {imageData.map((data, i) => {
+              return (
+                <img
+                  key={i}
+                  src={data.imageUrl}
+                  alt=""
+                  width={"10%"}
+                  height={"200px"}
+                />
+              );
+            })}{" "}
+          </div>
           <div className={styles.container6}>
             <div
               style={{ fontSize: "10px", lineHeight: "40px" }}
